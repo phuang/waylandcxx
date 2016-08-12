@@ -38,7 +38,7 @@ void Touch::OnUp(struct wl_touch* touch,
   fprintf(stderr, "%s this=%p\n", __PRETTY_FUNCTION__, this);
 }
 
-void Touch::OnMotion(struct wl_touch* touch, 
+void Touch::OnMotion(struct wl_touch* touch,
                      uint32_t time,
                      int32_t id,
                      wl_fixed_t surface_x,
