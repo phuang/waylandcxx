@@ -3,6 +3,7 @@
 
 #include <cstdint>
 #include <memory>
+#include <string>
 
 #include <wayland-client.h>
 
@@ -12,6 +13,7 @@ namespace wayland {
 
 class Keyboard;
 class Pointer;
+class Touch;
 
 class Seat : public Proxy<struct wl_seat, Seat> {
  public:
@@ -35,8 +37,12 @@ class Seat : public Proxy<struct wl_seat, Seat> {
     static_cast<Seat*>(data)->OnName(seat, name);
   }
 
+  // unique identifiers for this seat.
+  std::string name_;
+
   std::unique_ptr<Keyboard> keyboard_;
   std::unique_ptr<Pointer> pointer_;
+  std::unique_ptr<Touch> touch_;
 
   static const struct wl_seat_listener listener_;
 };

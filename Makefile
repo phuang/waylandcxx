@@ -16,6 +16,7 @@ SOURCES = \
 	subcompositor.cc \
 	subsurface.cc \
 	surface.cc \
+	touch.cc \
 	$(NULL)
 
 OBJECTS = $(SOURCES:.cc=.o)
