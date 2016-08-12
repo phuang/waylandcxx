@@ -9,7 +9,8 @@ template<typename T, typename C>
 class Proxy {
  public:
   explicit Proxy(T* id) : id_(id) {
-    wl_proxy_set_user_data(reinterpret_cast<struct wl_proxy*>(id_), this);
+    if (id_)
+      wl_proxy_set_user_data(reinterpret_cast<struct wl_proxy*>(id_), this);
   }
 
   ~Proxy() {}
@@ -20,7 +21,7 @@ class Proxy {
   }
 
  private:
-  T* id_;
+  T* const id_;
 };
 
 }  // namespace wayland

@@ -1,6 +1,6 @@
 CC = clang++
 CXX = clang++
-CXXFLAGS = -std=c++11 -MMD
+CXXFLAGS = -std=c++11 -MMD -g
 LDFLAGS = -lwayland-client -lwayland-egl -lEGL -lGLESv2
 
 SOURCES = \
