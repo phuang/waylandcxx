@@ -2,6 +2,7 @@ CC = clang++
 CXX = clang++
 CXXFLAGS = -std=c++11 -MMD
 LDFLAGS = -lwayland-client -lwayland-egl -lEGL -lGLESv2
+
 SOURCES = \
 	callback.cc \
 	compositor.cc \
@@ -17,6 +18,23 @@ SOURCES = \
 	subsurface.cc \
 	surface.cc \
 	touch.cc \
+	$(NULL)
+
+HEADERS = \
+	callback.h \
+	compositor.h \
+	display.h \
+	keyboard.h \
+	main.h \
+	pointer.h \
+	registry.h \
+	seat.h \
+	shell.h \
+	shell_surface.h \
+	subcompositor.h \
+	subsurface.h \
+	surface.h \
+	touch.h \
 	$(NULL)
 
 OBJECTS = $(SOURCES:.cc=.o)
