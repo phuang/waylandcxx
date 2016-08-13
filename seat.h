@@ -1,7 +1,6 @@
 #ifndef __SEAT_H_
 #define __SEAT_H_
 
-#include <cstdint>
 #include <memory>
 #include <string>
 
@@ -21,21 +20,17 @@ class Seat : public Proxy<struct wl_seat, Seat> {
   ~Seat();
 
  private:
-  // Seat event handlers:
-  void OnCapabilities(struct wl_seat* seat,
-                      uint32_t caps);
-  void OnName(struct wl_seat* seat,
-              const char* name);
+  // Event handlers:
+  void OnCapabilities(struct wl_seat* seat, uint32_t caps);
+  void OnName(struct wl_seat* seat, const char* name);
+ 
+  // Event handler thhunks:
   static void OnCapabilitiesThunk(void* data,
                                   struct wl_seat* seat,
-                                  uint32_t caps) {
-    static_cast<Seat*>(data)->OnCapabilities(seat, caps);
-  }
+                                  uint32_t caps);
   static void OnNameThunk(void* data,
                           struct wl_seat* seat,
-                          const char* name) {
-    static_cast<Seat*>(data)->OnName(seat, name);
-  }
+                          const char* name);
 
   // unique identifiers for this seat.
   std::string name_;

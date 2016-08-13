@@ -88,4 +88,29 @@ void ShellSurface::OnPopupDone(struct wl_shell_surface* shell_surface) {
     delegate_->OnPopupDone();
 }
 
+// static
+void ShellSurface::OnPingThunk(void* data,
+                               struct wl_shell_surface* shell_surface,
+                               uint32_t serial) {
+  static_cast<ShellSurface*>(data)->OnPing(shell_surface, serial);
+}
+
+// static
+void ShellSurface::OnConfigureThunk(void* data,
+                                    struct wl_shell_surface* shell_surface,
+                                    uint32_t edges,
+                                    int32_t width,
+                                    int32_t height) {
+  static_cast<ShellSurface*>(data)->OnConfigure(shell_surface,
+                                                edges,
+                                                width,
+                                                height);
+}
+
+// static
+void ShellSurface::OnPopupDoneThunk(void* data,
+                                    struct wl_shell_surface* shell_surface) {
+  static_cast<ShellSurface*>(data)->OnPopupDone(shell_surface);
+}
+
 }  // namespace wayldn

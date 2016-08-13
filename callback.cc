@@ -18,4 +18,11 @@ void Callback::OnDone(struct wl_callback* callback,
                       uint32_t callback_data) {
 }
 
+// static
+void Callback::OnDoneThunk(void* data,
+                           struct wl_callback* callback,
+                           uint32_t callback_data) {
+  static_cast<Callback*>(data)->OnDone(callback, callback_data);
+}
+
 }  // namespace wayland

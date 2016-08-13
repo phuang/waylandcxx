@@ -65,4 +65,60 @@ void Keyboard::OnRepeatInfo(struct wl_keyboard *wl_keyboard,
   fprintf(stderr, "%s this=%p\n", __PRETTY_FUNCTION__, this);
 }
 
+// static
+void Keyboard::OnKeymapThunk(void* data,
+                             struct wl_keyboard* keyboard,
+                             uint32_t format,
+                             int32_t fd,
+                             uint32_t size) {
+  static_cast<Keyboard*>(data)->OnKeymap(keyboard, format, fd, size);
+}
+
+// static
+void Keyboard::OnEnterThunk(void* data,
+                            struct wl_keyboard* keyboard,
+                            uint32_t serial,
+                            struct wl_surface* surface,
+                            struct wl_array* keys) {
+  static_cast<Keyboard*>(data)->OnEnter(keyboard, serial, surface, keys);
+}
+
+// static
+void Keyboard::OnLeaveThunk(void* data,
+                            struct wl_keyboard* keyboard,
+                            uint32_t serial,
+                            struct wl_surface* surface) {
+  static_cast<Keyboard*>(data)->OnLeave(keyboard, serial, surface);
+}
+
+// static
+void Keyboard::OnKeyThunk(void* data,
+                          struct wl_keyboard* keyboard,
+                          uint32_t serial,
+                          uint32_t time,
+                          uint32_t key,
+                          uint32_t state) {
+  static_cast<Keyboard*>(data)->OnKey(keyboard, serial, time, key, state);
+}
+
+// static
+void Keyboard::OnModifiersThunk(void* data,
+                                struct wl_keyboard* keyboard,
+                                uint32_t serial,
+                                uint32_t mods_depressed,
+                                uint32_t mods_latched,
+                                uint32_t mods_locked,
+                                uint32_t group) {
+  static_cast<Keyboard*>(data)->OnModifiers(keyboard, serial, mods_depressed,
+                                            mods_latched, mods_locked, group);
+}
+
+// static
+void Keyboard::OnRepeatInfoThunk(void* data,
+                                 struct wl_keyboard *keyboard,
+                                 int32_t rate,
+                                 int32_t delay) {
+  static_cast<Keyboard*>(data)->OnRepeatInfo(keyboard, rate, delay);
+}
+
 }   // namespace wayland

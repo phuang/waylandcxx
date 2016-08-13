@@ -37,7 +37,7 @@ class ShellSurface : public Proxy<struct wl_shell_surface, ShellSurface> {
   void SetClass(const char* class_);
 
  private:
-  // Surface events:
+  // Eevents handlers:
   void OnPing(struct wl_shell_surface* shell_surface,
               uint32_t serial);
   void OnConfigure(struct wl_shell_surface* shell_surface,
@@ -45,25 +45,18 @@ class ShellSurface : public Proxy<struct wl_shell_surface, ShellSurface> {
                    int32_t width,
                    int32_t height);
   void OnPopupDone(struct wl_shell_surface* shell_surface);
+
+  // Event handler thunks:
   static void OnPingThunk(void* data,
                           struct wl_shell_surface* shell_surface,
-                          uint32_t serial) {
-    static_cast<ShellSurface*>(data)->OnPing(shell_surface, serial);
-  }
+                          uint32_t serial);
   static void OnConfigureThunk(void* data,
                                struct wl_shell_surface* shell_surface,
                                uint32_t edges,
                                int32_t width,
-                               int32_t height) {
-    static_cast<ShellSurface*>(data)->OnConfigure(shell_surface,
-                                                  edges,
-                                                  width,
-                                                  height);
-  }
+                               int32_t height);
   static void OnPopupDoneThunk(void* data,
-                               struct wl_shell_surface* shell_surface) {
-    static_cast<ShellSurface*>(data)->OnPopupDone(shell_surface);
-  }
+                               struct wl_shell_surface* shell_surface);
 
   Delegate* delegate_;
 

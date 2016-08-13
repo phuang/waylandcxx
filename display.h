@@ -48,8 +48,11 @@ class Display : public Proxy<struct wl_display, Display>,
   void OnGlobal(uint32_t id, const char* interface, uint32_t version) override;
   void OnGlobalRemove(uint32_t id) override;
 
+  // Shm event handlers:
   void OnShmFormat(struct wl_shm* shm,
                    uint32_t format);
+
+  // Shm event handler thunks:
   static void OnShmFormatThunk(void* data,
                                struct wl_shm* shm,
                                uint32_t format) {

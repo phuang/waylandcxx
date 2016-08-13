@@ -44,20 +44,19 @@ class Surface : public Proxy<struct wl_surface, Surface> {
 #endif
   
  private:
+  // Event handlers:
   void OnEntry(struct wl_surface* surface,
                struct wl_output* output);
   void OnLeave(struct wl_surface* surface,
                struct wl_output* output);
+
+  // Event handler thunks:
   static void OnEntryThunk(void* data,
                            struct wl_surface* surface,
-                           struct wl_output* output) {
-    static_cast<Surface*>(data)->OnEntry(surface, output);
-  }
+                           struct wl_output* output);
   static void OnLeaveThunk(void* data,
                            struct wl_surface* surface,
-                           struct wl_output* output) {
-    static_cast<Surface*>(data)->OnLeave(surface, output);
-  }
+                           struct wl_output* output);
 
   struct wl_egl_window* egl_window_;
 

@@ -27,4 +27,18 @@ void Surface::OnLeave(struct wl_surface* surface,
   fprintf(stderr, "%s this=%p\n", __PRETTY_FUNCTION__, this);
 }
 
+// static
+void Surface::OnEntryThunk(void* data,
+                           struct wl_surface* surface,
+                           struct wl_output* output) {
+  static_cast<Surface*>(data)->OnEntry(surface, output);
+}
+
+// static
+void Surface::OnLeaveThunk(void* data,
+                           struct wl_surface* surface,
+                           struct wl_output* output) {
+  static_cast<Surface*>(data)->OnLeave(surface, output);
+}
+
 }  // namespace wayland

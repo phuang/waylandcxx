@@ -31,24 +31,23 @@ class Registry : public Proxy<struct wl_registry, Registry> {
   }
 
  private:
+  // Event handlers:
   void OnGlobal(struct wl_registry* registry, uint32_t id,
                 const char* interface, uint32_t version);
   void OnGlobalRemove(struct wl_registry* registry, uint32_t id);
+
+  // Event handler thunks:
   static void OnGlobalThunk(void* data,
                             struct wl_registry* registry,
                             uint32_t id,
                             const char* interface,
-                            uint32_t version) {
-    static_cast<Registry*>(data)->OnGlobal(
-        registry, id, interface, version);
-  }
+                            uint32_t version);
   static void OnGlobalRemoveThunk(void* data,
                                   struct wl_registry* registry,
-                                  uint32_t id) {
-    static_cast<Registry*>(data)->OnGlobalRemove(registry, id);
-  }
+                                  uint32_t id);
 
   Delegate* delegate_;
+
   static const struct wl_registry_listener listener_;
 };
 
