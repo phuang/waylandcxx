@@ -54,4 +54,46 @@ void Touch::OnCancel(struct wl_touch* touch) {
   fprintf(stderr, "%s this=%p\n", __PRETTY_FUNCTION__, this);
 }
 
+// static
+void Touch::OnDownThunk(void* data,
+                        struct wl_touch* touch,
+                        uint32_t serial,
+                        uint32_t time,
+                        struct wl_surface* surface,
+                        int32_t id,
+                        wl_fixed_t surface_x,
+                        wl_fixed_t surface_y) {
+  static_cast<Touch*>(data)->OnDown(touch, serial, time, surface, id,surface_x,
+                                    surface_y);
+}
+
+// static
+void Touch::OnUpThunk(void* data,
+                      struct wl_touch* touch,
+                      uint32_t serial,
+                      uint32_t time,
+                      int32_t id) {
+  static_cast<Touch*>(data)->OnUp(touch, serial, time, id);
+}
+
+// static
+void Touch::OnMotionThunk(void *data,
+                          struct wl_touch* touch,
+                          uint32_t time,
+                          int32_t id,
+                          wl_fixed_t surface_x,
+                          wl_fixed_t surface_y) {
+  static_cast<Touch*>(data)->OnMotion(touch, time, id, surface_x, surface_y);
+}
+
+// static
+void Touch::OnFrameThunk(void* data, struct wl_touch* touch) {
+  static_cast<Touch*>(data)->OnFrame(touch);
+}
+
+// static
+void Touch::OnCancelThunk(void* data, struct wl_touch* touch) {
+  static_cast<Touch*>(data)->OnCancel(touch);
+}
+
 }  // namespace wayland

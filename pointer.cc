@@ -10,9 +10,11 @@ const struct wl_pointer_listener Pointer::listener_ = {
   Pointer::OnMotionThunk,
   Pointer::OnButtonThunk,
   Pointer::OnAxisThunk,
+#if 0
   Pointer::OnFrameThunk,
   Pointer::OnAxisSourceThunk,
   Pointer::OnAxisStopThunk,
+#endif
 };
 
 Pointer::Pointer(struct wl_pointer* pointer)
