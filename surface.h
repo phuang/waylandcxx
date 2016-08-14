@@ -8,12 +8,14 @@
 
 namespace wayland {
 
+class Buffer;
+
 class Surface : public Proxy<struct wl_surface, Surface> {
  public:
   explicit Surface(struct wl_surface* surface);
   ~Surface();
 
-  void Attach(struct wl_buffer* buffer, int32_t x, int32_t y);
+  void Attach(Buffer* buffer, int32_t x, int32_t y);
   void Damage(int32_t x, int32_t y, int32_t width, int32_t height);
   struct wl_callback* Frame();
   void SetOpaqueRegion(struct wl_region* region);

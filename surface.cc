@@ -1,6 +1,6 @@
 #include "surface.h"
 
-#include "display.h"
+#include "buffer.h"
 
 namespace wayland {
 
@@ -17,8 +17,8 @@ Surface::Surface(struct wl_surface* surface)
 Surface::~Surface() {
 }
 
-void Surface::Attach(struct wl_buffer* buffer, int32_t x, int32_t y) {
-  wl_surface_attach(id(), buffer, x, y);
+void Surface::Attach(Buffer* buffer, int32_t x, int32_t y) {
+  wl_surface_attach(id(), buffer->id(), x, y);
 }
 
 void Surface::Damage(int32_t x, int32_t y, int32_t width, int32_t height) {
