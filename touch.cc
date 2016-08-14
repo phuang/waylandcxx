@@ -2,7 +2,7 @@
 
 #include <stdio.h>
 
-namespace wayland {
+namespace wl {
 
 const struct wl_touch_listener Touch::listener_ = {
   Touch::OnDownThunk,
@@ -96,4 +96,4 @@ void Touch::OnCancelThunk(void* data, struct wl_touch* touch) {
   static_cast<Touch*>(data)->OnCancel(touch);
 }
 
-}  // namespace wayland
+}  // namespace wl

@@ -2,7 +2,7 @@
 
 #include <stdio.h>
 
-namespace wayland {
+namespace wl {
 
 const struct wl_pointer_listener Pointer::listener_ = {
   Pointer::OnEnterThunk,
@@ -142,4 +142,4 @@ void Pointer::OnAxisStopThunk(void* data,
   static_cast<Pointer*>(data)->OnAxisStop(pointer, time, axis);
 }
 
-}   // namespace wayland
+}   // namespace wl

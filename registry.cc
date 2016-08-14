@@ -1,6 +1,6 @@
 #include "registry.h"
 
-namespace wayland {
+namespace wl {
 
 const struct wl_registry_listener Registry::listener_ = {
   Registry::OnGlobalThunk,
@@ -47,4 +47,4 @@ void Registry::OnGlobalRemoveThunk(void* data,
   static_cast<Registry*>(data)->OnGlobalRemove(registry, id);
 }
 
-}  // namespace wayland
+}  // namespace wl

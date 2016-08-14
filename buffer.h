@@ -7,7 +7,7 @@
 
 #include "proxy.h"
 
-namespace wayland {
+namespace wl {
 
 class BufferPool;
 

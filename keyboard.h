@@ -7,7 +7,7 @@
 
 #include "proxy.h"
 
-namespace wayland {
+namespace wl {
 
 class Keyboard : public Proxy<struct wl_keyboard, Keyboard> {
  public:
@@ -78,6 +78,6 @@ class Keyboard : public Proxy<struct wl_keyboard, Keyboard> {
   static const struct wl_keyboard_listener listener_;
 };
 
-}  // namespace wayland
+}  // namespace wl
 
 #endif

@@ -6,7 +6,7 @@
 
 #include "proxy.h"
 
-namespace wayland {
+namespace wl {
 
 class Subsurface;
 class Surface;
@@ -19,5 +19,5 @@ class Subcompositor : public Proxy<struct wl_subcompositor, Subcompositor> {
   std::unique_ptr<Subsurface> GetSubsurface(Surface* surface, Surface* parent);
 };
 
-}  // namespace wayland
+}  // namespace wl
 #endif

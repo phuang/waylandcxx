@@ -2,7 +2,7 @@
 
 #include "buffer.h"
 
-namespace wayland {
+namespace wl {
 
 const struct wl_surface_listener Surface::surface_listener_ = {
   Surface::OnEntryThunk,
@@ -82,4 +82,4 @@ void Surface::OnLeaveThunk(void* data,
   static_cast<Surface*>(data)->OnLeave(surface, output);
 }
 
-}  // namespace wayland
+}  // namespace wl

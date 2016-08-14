@@ -3,7 +3,7 @@
 #include "subsurface.h"
 #include "surface.h"
 
-namespace wayland {
+namespace wl {
 
 Subcompositor::Subcompositor(struct wl_subcompositor* subcompositor)
   : Proxy(subcompositor) {
@@ -22,4 +22,4 @@ std::unique_ptr<Subsurface> Subcompositor::GetSubsurface(
   return std::unique_ptr<Subsurface>(new Subsurface(subsurface));
 }
 
-}  // namespace wayland
+}  // namespace wl

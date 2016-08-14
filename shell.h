@@ -8,7 +8,7 @@
 #include "proxy.h"
 #include "shell_surface.h"
 
-namespace wayland {
+namespace wl {
 
 class Surface;
 

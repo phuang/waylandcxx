@@ -7,7 +7,7 @@
 
 #include "proxy.h"
 
-namespace wayland {
+namespace wl {
 
 class Touch : public Proxy<struct wl_touch, Touch> {
  public:
@@ -61,6 +61,6 @@ class Touch : public Proxy<struct wl_touch, Touch> {
   static const struct wl_touch_listener listener_;
 };
 
-}  // namespace wayland
+}  // namespace wl
 
 #endif

@@ -3,7 +3,7 @@
 
 #include <wayland-client.h>
 
-namespace wayland {
+namespace wl {
 
 template<typename T, typename C>
 class Proxy {
@@ -24,6 +24,6 @@ class Proxy {
   T* const id_;
 };
 
-}  // namespace wayland
+}  // namespace wl
 
 #endif

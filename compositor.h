@@ -6,7 +6,7 @@
 
 #include "proxy.h"
 
-namespace wayland {
+namespace wl {
 
 class Region;
 class Surface;
@@ -20,5 +20,5 @@ class Compositor : public Proxy<struct wl_compositor, Compositor> {
   std::unique_ptr<Region> CreateRegion();
 };
 
-}  // namespace wayland
+}  // namespace wl
 #endif

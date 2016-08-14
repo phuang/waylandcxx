@@ -16,7 +16,7 @@
 #include "shm.h"
 #include "subcompositor.h"
 
-namespace wayland {
+namespace wl {
 
 namespace {
 Display* g_instance_ = nullptr;
@@ -191,4 +191,4 @@ void Display::OnDeleteIdThunk(void* data,
   static_cast<Display*>(data)->OnDeleteId(display, id);
 }
 
-}  // namespace wayland
+}  // namespace wl

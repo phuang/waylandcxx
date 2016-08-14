@@ -2,7 +2,7 @@
 
 #include "buffer.h"
 
-namespace wayland {
+namespace wl {
 
 ShmPool::ShmPool(struct wl_shm_pool* shm_pool) : Proxy(shm_pool) {
 }
@@ -27,4 +27,4 @@ void ShmPool::Resize(int32_t size) {
   wl_shm_pool_resize(id(), size);
 }
 
-}  // namespace wayland
+}  // namespace wl

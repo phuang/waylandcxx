@@ -5,7 +5,7 @@
 
 #include "proxy.h"
 
-namespace wayland {
+namespace wl {
 
 class Display;
 class Seat;
@@ -63,6 +63,6 @@ class ShellSurface : public Proxy<struct wl_shell_surface, ShellSurface> {
   static const struct wl_shell_surface_listener listener_;
 };
 
-}  // namespace wayland
+}  // namespace wl
 
 #endif

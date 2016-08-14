@@ -2,7 +2,7 @@
 
 #include "shm_pool.h"
 
-namespace wayland {
+namespace wl {
 
 const struct wl_shm_listener Shm::listener_ = {
   Shm::OnFormatThunk,
@@ -34,4 +34,4 @@ void Shm::OnFormatThunk(void* data, struct wl_shm* shm, uint32_t format) {
   static_cast<Shm*>(data)->OnFormat(shm, format);
 }
 
-}  // namespace wayland
+}  // namespace wl

@@ -7,7 +7,7 @@
 #include "display.h"
 #include "surface.h"
 
-namespace wayland {
+namespace wl {
 
 class Surface;
 
@@ -39,6 +39,6 @@ class EGLWindow {
   EGLSurface egl_surface_ = nullptr;
 };
 
-}  // namespace wayland
+}  // namespace wl
 
 #endif

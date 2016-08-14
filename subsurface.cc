@@ -1,6 +1,6 @@
 #include "subsurface.h"
 
-namespace wayland {
+namespace wl {
 
 Subsurface::Subsurface(struct wl_subsurface* subsurface) : Proxy(subsurface) {
 }
@@ -29,4 +29,4 @@ void Subsurface::SetDesync() {
   wl_subsurface_set_desync(id());
 }
 
-}  // namespace wayland
+}  // namespace wl

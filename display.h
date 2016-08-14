@@ -13,7 +13,7 @@
 #include "proxy.h"
 #include "registry.h"
 
-namespace wayland {
+namespace wl {
 
 class Compositor;
 class Seat;
@@ -82,6 +82,6 @@ class Display : public Proxy<struct wl_display, Display>,
 
 };
 
-}  // namespace wayland
+}  // namespace wl
 
 #endif

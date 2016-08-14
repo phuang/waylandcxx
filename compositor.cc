@@ -2,7 +2,7 @@
 
 #include "surface.h"
 
-namespace wayland {
+namespace wl {
 
 Compositor::Compositor(struct wl_compositor* compositor)
   : Proxy(compositor) {
@@ -16,4 +16,4 @@ std::unique_ptr<Surface> Compositor::CreateSurface() {
       new Surface(wl_compositor_create_surface(id())));
 }
 
-}  // namespace wayland
+}  // namespace wl

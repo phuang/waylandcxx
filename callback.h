@@ -5,7 +5,7 @@
 
 #include "proxy.h"
 
-namespace wayland {
+namespace wl {
 
 class Callback : public Proxy<struct wl_callback, Callback> {
  public:
@@ -25,5 +25,5 @@ class Callback : public Proxy<struct wl_callback, Callback> {
   static const struct wl_callback_listener listener_;
 };
 
-}  // namespace wayland
+}  // namespace wl
 #endif

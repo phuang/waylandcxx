@@ -4,7 +4,7 @@
 #include "seat.h"
 #include "surface.h"
 
-namespace wayland {
+namespace wl {
 
 const struct wl_shell_surface_listener ShellSurface::listener_ = {
   OnPingThunk,

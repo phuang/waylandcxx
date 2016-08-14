@@ -1,6 +1,6 @@
 #include "callback.h"
 
-namespace wayland {
+namespace wl {
 
 const struct wl_callback_listener Callback::listener_ = {
   Callback::OnDoneThunk,
@@ -25,4 +25,4 @@ void Callback::OnDoneThunk(void* data,
   static_cast<Callback*>(data)->OnDone(callback, callback_data);
 }
 
-}  // namespace wayland
+}  // namespace wl

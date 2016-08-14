@@ -8,7 +8,7 @@
 
 #include "proxy.h"
 
-namespace wayland {
+namespace wl {
 
 class Keyboard;
 class Pointer;
@@ -42,6 +42,6 @@ class Seat : public Proxy<struct wl_seat, Seat> {
   static const struct wl_seat_listener listener_;
 };
 
-}  // namespace wayland
+}  // namespace wl
 
 #endif

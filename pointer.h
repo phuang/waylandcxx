@@ -7,7 +7,7 @@
 
 #include "proxy.h"
 
-namespace wayland {
+namespace wl {
 
 class Pointer : public Proxy<struct wl_pointer, Pointer> {
  public:
@@ -82,6 +82,6 @@ class Pointer : public Proxy<struct wl_pointer, Pointer> {
   static const struct wl_pointer_listener listener_;
 };
 
-}  // namespace wayland
+}  // namespace wl
 
 #endif

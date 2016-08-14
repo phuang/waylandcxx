@@ -1,6 +1,6 @@
 #include "buffer.h"
 
-namespace wayland {
+namespace wl {
 
 const struct wl_buffer_listener Buffer::listener_ = {
   Buffer::OnReleaseThunk,
@@ -24,4 +24,4 @@ void Buffer::OnReleaseThunk(void* data, struct wl_buffer* buffer) {
   static_cast<Buffer*>(data)->OnRelease(buffer);
 }
 
-}  // namespace wayland
+}  // namespace wl

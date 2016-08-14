@@ -3,7 +3,7 @@
 #include "shell_surface.h"
 #include "surface.h"
 
-namespace wayland {
+namespace wl {
 
 Shell::Shell(struct wl_shell* shell) : Proxy(shell) { }
 
@@ -21,4 +21,4 @@ std::unique_ptr<ShellSurface> Shell::GetShellSurface(
       new ShellSurface(shell_surface, delegate));
 }
 
-}  // namespace wayland
+}  // namespace wl

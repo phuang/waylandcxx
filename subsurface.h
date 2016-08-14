@@ -6,7 +6,7 @@
 #include "proxy.h"
 #include "surface.h"
 
-namespace wayland {
+namespace wl {
 
 class Surface;
 
@@ -22,7 +22,7 @@ class Subsurface : public Proxy<struct wl_subsurface, Subsurface> {
   void SetDesync();
 };
 
-}  // namespace wayland
+}  // namespace wl
 
 
 #endif

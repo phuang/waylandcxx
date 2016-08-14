@@ -6,7 +6,7 @@
 #include "pointer.h"
 #include "touch.h"
 
-namespace wayland {
+namespace wl {
 
 const struct wl_seat_listener Seat::listener_ = {
   Seat::OnCapabilitiesThunk,
@@ -54,4 +54,4 @@ void Seat::OnNameThunk(void* data,
   static_cast<Seat*>(data)->OnName(seat, name);
 }
 
-}   // namespace wayland
+}   // namespace wl

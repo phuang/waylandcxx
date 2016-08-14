@@ -6,7 +6,7 @@
 #include "proxy.h"
 #include "surface.h"
 
-namespace wayland {
+namespace wl {
 
 class Surface;
 
@@ -51,7 +51,7 @@ class Registry : public Proxy<struct wl_registry, Registry> {
   static const struct wl_registry_listener listener_;
 };
 
-}  // namespace wayland
+}  // namespace wl
 
 
 #endif

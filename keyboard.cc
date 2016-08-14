@@ -2,7 +2,7 @@
 
 #include <stdio.h>
 
-namespace wayland {
+namespace wl {
 
 const struct wl_keyboard_listener Keyboard::listener_ = {
   Keyboard::OnKeymapThunk,
@@ -121,4 +121,4 @@ void Keyboard::OnRepeatInfoThunk(void* data,
   static_cast<Keyboard*>(data)->OnRepeatInfo(keyboard, rate, delay);
 }
 
-}   // namespace wayland
+}   // namespace wl
