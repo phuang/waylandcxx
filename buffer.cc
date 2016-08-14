@@ -7,7 +7,9 @@ const struct wl_buffer_listener Buffer::listener_ = {
 };
 
 
-Buffer::Buffer(struct wl_buffer* buffer) : Proxy(buffer) {
+Buffer::Buffer(struct wl_buffer* buffer, Delegate* delegate)
+  : Proxy(buffer),
+    delegate_(delegate) {
   wl_buffer_add_listener(id(), &listener_, this);
 }
 
@@ -16,7 +18,8 @@ Buffer::~Buffer() {
 }
 
 void Buffer::OnRelease(struct wl_buffer* buffer) {
-  fprintf(stderr, "%s this=%p\n", __PRETTY_FUNCTION__, this);
+  if (delegate_)
+    delegate_->OnRelease();
 }
 
 // static

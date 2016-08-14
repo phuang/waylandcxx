@@ -13,7 +13,11 @@ class BufferPool;
 
 class Buffer : public Proxy<struct wl_buffer, Buffer> {
  public:
-  explicit Buffer(struct wl_buffer* buffer);
+  class Delegate {
+    public:
+     virtual void OnRelease() = 0;
+  };
+  Buffer(struct wl_buffer* buffer, Delegate* delegate);
   ~Buffer();
 
  private:
@@ -24,6 +28,7 @@ class Buffer : public Proxy<struct wl_buffer, Buffer> {
   static void OnReleaseThunk(void* data, struct wl_buffer* buffer);
 
   static const struct wl_buffer_listener listener_;
+  Delegate* delegate_;
 };
 
 }

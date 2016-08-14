@@ -5,6 +5,7 @@
 
 #include <wayland-client.h>
 
+#include "buffer.h"
 #include "proxy.h"
 
 namespace wl {
@@ -16,7 +17,8 @@ class ShmPool : public Proxy<struct wl_shm_pool, ShmPool> {
   explicit ShmPool(struct wl_shm_pool* shm_pool);
   ~ShmPool();
 
-  std::unique_ptr<Buffer> CreateBuffer(int32_t offset,
+  std::unique_ptr<Buffer> CreateBuffer(Buffer::Delegate* delegate,
+                                       int32_t offset,
                                        int32_t width,
                                        int32_t height,
                                        int32_t stride,

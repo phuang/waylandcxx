@@ -11,7 +11,8 @@ ShmPool::~ShmPool() {
   wl_shm_pool_destroy(id());
 }
 
-std::unique_ptr<Buffer> ShmPool::CreateBuffer(int32_t offset,
+std::unique_ptr<Buffer> ShmPool::CreateBuffer(Buffer::Delegate* delegate,
+                                              int32_t offset,
                                               int32_t width,
                                               int32_t height,
                                               int32_t stride,
@@ -20,7 +21,7 @@ std::unique_ptr<Buffer> ShmPool::CreateBuffer(int32_t offset,
       id(), offset, width, height, stride, format);
   if (!buffer)
     return nullptr;
-  return std::unique_ptr<Buffer>(new Buffer(buffer));
+  return std::unique_ptr<Buffer>(new Buffer(buffer, delegate));
 }
 
 void ShmPool::Resize(int32_t size) {
