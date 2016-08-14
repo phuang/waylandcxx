@@ -21,6 +21,11 @@ namespace {
 Display* g_instance_ = nullptr;
 }
 
+const struct wl_display_listener Display::listener_ = {
+  Display::OnErrorThunk,
+  Display::OnDeleteIdThunk,
+};
+
 const struct wl_shm_listener Display::shm_listener_ = {
   Display::OnShmFormatThunk,
 };
@@ -28,14 +33,16 @@ const struct wl_shm_listener Display::shm_listener_ = {
 Display::Display() : Proxy(wl_display_connect(nullptr)) {
   assert(!g_instance_);
   g_instance_ = this;
-  
+
   if (!id()) {
     fprintf(stderr, "can't connect to display\n");
     exit(EXIT_FAILURE);
   }
 
+  wl_display_add_listener(id(), &listener_, this);
+
   registry_.reset(new Registry(wl_display_get_registry(id()), this));
-  
+
   wl_display_dispatch(id());
   wl_display_roundtrip(id());
 
@@ -125,6 +132,10 @@ void Display::Run() {
   }
 }
 
+void Display::Sync() {
+  wl_display_sync(id());
+}
+
 void Display::OnGlobal(uint32_t id, const char* interface, uint32_t version) {
   printf("Got a registry event for id %d interface %s\n",
          id, interface);
@@ -157,6 +168,33 @@ void Display::OnGlobal(uint32_t id, const char* interface, uint32_t version) {
 
 void Display::OnGlobalRemove(uint32_t id) {
   printf("Got a registry remover event for id %d\n", id);
+}
+
+void Display::OnError(struct wl_display* display,
+                      void* object_id,
+                      uint32_t code,
+                      const char* message) {
+  fprintf(stderr, "%s : (id=%p, code=%u)\n", message, object_id, code);
+}
+
+void Display::OnDeleteId(struct wl_display* display, uint32_t id) {
+  fprintf(stderr, "%s this=%p\n", __PRETTY_FUNCTION__, this);
+}
+
+// static
+void Display::OnErrorThunk(void* data,
+                           struct wl_display* display,
+                           void* object_id,
+                           uint32_t code,
+                           const char* message) {
+  static_cast<Display*>(data)->OnError(display, object_id, code, message);
+}
+
+// static
+void Display::OnDeleteIdThunk(void* data,
+                              struct wl_display* display,
+                              uint32_t id) {
+  static_cast<Display*>(data)->OnDeleteId(display, id);
 }
 
 void Display::OnShmFormat(struct wl_shm* shm,

@@ -30,10 +30,7 @@ class Display : public Proxy<struct wl_display, Display>,
 
   void InitEGL();
   void Run();
-
-  void Sync() {
-    wl_display_sync(id());
-  }
+  void Sync();
 
   Registry* registry() { return registry_.get(); }
   Compositor* compositor() { return compositor_.get(); }
@@ -48,6 +45,22 @@ class Display : public Proxy<struct wl_display, Display>,
   void OnGlobal(uint32_t id, const char* interface, uint32_t version) override;
   void OnGlobalRemove(uint32_t id) override;
 
+  // Event handlers:
+  void OnError(struct wl_display* display,
+               void* object_id,
+               uint32_t code,
+               const char* message);
+  void OnDeleteId(struct wl_display* display, uint32_t id);
+
+  // Event handler thunks:
+  static void OnErrorThunk(void* data,
+                           struct wl_display* display,
+                           void* object_id,
+                           uint32_t code,
+                           const char* message);
+  static void OnDeleteIdThunk(void* data,
+                              struct wl_display* display,
+                              uint32_t id);
   // Shm event handlers:
   void OnShmFormat(struct wl_shm* shm,
                    uint32_t format);
@@ -72,9 +85,10 @@ class Display : public Proxy<struct wl_display, Display>,
   EGLDisplay egl_display_ = EGL_NO_DISPLAY;
   EGLConfig egl_config_;
   EGLContext egl_context_;
-  
+
+  static const struct wl_display_listener listener_;
   static const struct wl_shm_listener shm_listener_;
-  
+
 };
 
 }  // namespace wayland

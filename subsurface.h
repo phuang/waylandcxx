@@ -15,26 +15,11 @@ class Subsurface : public Proxy<struct wl_subsurface, Subsurface> {
   explicit Subsurface(struct wl_subsurface* subsurface);
   ~Subsurface();
 
-  void SetPosition(int32_t x, int32_t y) {
-    wl_subsurface_set_position(id(), x, y);
-  }
-
-  void PlaceAbove(Surface* sibling) {
-    wl_subsurface_place_above(id(), sibling->id());
-  }
-
-  void PlaceBelow(Surface* sibling) {
-    wl_subsurface_place_below(id(), sibling->id());
-  }
-
-  void SetSync() {
-    wl_subsurface_set_sync(id());
-  }
-
-  void SetDesync() {
-    wl_subsurface_set_desync(id());
-  }
-
+  void SetPosition(int32_t x, int32_t y);
+  void PlaceAbove(Surface* sibling);
+  void PlaceBelow(Surface* sibling);
+  void SetSync();
+  void SetDesync();
 };
 
 }  // namespace wayland
