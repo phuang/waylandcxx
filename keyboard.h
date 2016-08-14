@@ -41,7 +41,7 @@ class Keyboard : public Proxy<struct wl_keyboard, Keyboard> {
   void OnRepeatInfo(struct wl_keyboard *wl_keyboard,
                     int32_t rate,
                     int32_t delay);
-  
+
   // Event handler thunks:
   static void OnKeymapThunk(void* data,
                             struct wl_keyboard* keyboard,

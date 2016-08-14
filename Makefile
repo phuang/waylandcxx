@@ -4,6 +4,7 @@ CXXFLAGS = -std=c++11 -MMD -g
 LDFLAGS = -lwayland-client -lwayland-egl -lEGL -lGLESv2
 
 SOURCES = \
+	buffer.cc \
 	callback.cc \
 	compositor.cc \
 	display.cc \
@@ -14,6 +15,8 @@ SOURCES = \
 	seat.cc \
 	shell.cc \
 	shell_surface.cc \
+	shm.cc \
+	shm_pool.cc \
 	subcompositor.cc \
 	subsurface.cc \
 	surface.cc \
@@ -21,6 +24,7 @@ SOURCES = \
 	$(NULL)
 
 HEADERS = \
+	buffer.h \
 	callback.h \
 	compositor.h \
 	display.h \
@@ -31,6 +35,8 @@ HEADERS = \
 	seat.h \
 	shell.h \
 	shell_surface.h \
+	shm.h \
+	shm_pool.h \
 	subcompositor.h \
 	subsurface.h \
 	surface.h \

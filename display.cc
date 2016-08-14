@@ -13,6 +13,7 @@
 #include "registry.h"
 #include "seat.h"
 #include "shell.h"
+#include "shm.h"
 #include "subcompositor.h"
 
 namespace wayland {
@@ -24,10 +25,6 @@ Display* g_instance_ = nullptr;
 const struct wl_display_listener Display::listener_ = {
   Display::OnErrorThunk,
   Display::OnDeleteIdThunk,
-};
-
-const struct wl_shm_listener Display::shm_listener_ = {
-  Display::OnShmFormatThunk,
 };
 
 Display::Display() : Proxy(wl_display_connect(nullptr)) {
@@ -52,9 +49,6 @@ Display::Display() : Proxy(wl_display_connect(nullptr)) {
 Display::~Display() {
   assert(g_instance_ == this);
   g_instance_ = nullptr;
-
-  if (shm_)
-    wl_shm_destroy(shm_);
 
   if (egl_context_)
     eglDestroyContext(egl_display_, egl_context_);
@@ -148,7 +142,7 @@ void Display::OnGlobal(uint32_t id, const char* interface, uint32_t version) {
         id, &wl_output_interface, 2);
   } else if (strcmp(interface, "wl_seat") == 0) {
     seat_version_ = version;
-    auto seat =  registry_->Bind<struct wl_seat>(
+    auto seat = registry_->Bind<struct wl_seat>(
         id, &wl_seat_interface, std::max(seat_version_, 3u));
     std::unique_ptr<Seat> input(new Seat(seat));
     seats_.push_back(std::move(input));
@@ -156,8 +150,8 @@ void Display::OnGlobal(uint32_t id, const char* interface, uint32_t version) {
     auto shell = registry_->Bind<struct wl_shell>(id, &wl_shell_interface, 1);
     shell_.reset(new Shell(shell));
   } else if (strcmp(interface, "wl_shm") == 0) {
-    auto shm_ = registry_->Bind<struct wl_shm>(id, &wl_shm_interface, 1);
-    wl_shm_add_listener(shm_, &shm_listener_, this);
+    auto shm = registry_->Bind<struct wl_shm>(id, &wl_shm_interface, 1);
+    shm_.reset(new Shm(shm));
   } else if (strcmp(interface, "workspace_manager") == 0) {
   } else if (strcmp(interface, "wl_subcompositor") == 0) {
     auto subcompositor = registry_->Bind<struct wl_subcompositor>(
@@ -195,11 +189,6 @@ void Display::OnDeleteIdThunk(void* data,
                               struct wl_display* display,
                               uint32_t id) {
   static_cast<Display*>(data)->OnDeleteId(display, id);
-}
-
-void Display::OnShmFormat(struct wl_shm* shm,
-                          uint32_t format) {
-  fprintf(stderr, "%s format=%u\n", __func__, format);
 }
 
 }  // namespace wayland
