@@ -1,7 +1,6 @@
 #include <assert.h>
 #include <fcntl.h>
 #include <GLES2/gl2.h>
-#include <linux/memfd.h>
 #include <sys/mman.h>
 #include <sys/stat.h>
 #include <sys/syscall.h>
@@ -58,9 +57,13 @@ class SharedMemory {
 
   bool Create(int32_t size) {
     assert(fd_ == -1);
-    fd_ = syscall(SYS_memfd_create, "", O_RDWR);
-    if (fd_ < 0)
+    const char* kShmName = "/waytest";
+    fd_ = shm_open(kShmName, O_RDWR | O_CREAT, 0777);
+    if (fd_ < 0) {
+      perror("shm_create");
       return false;
+    }
+    shm_unlink(kShmName);
     if (ftruncate(fd_, size_ = size) < 0)
       return false;
     memory_ = mmap(nullptr, size_, PROT_READ | PROT_WRITE, MAP_SHARED, fd_, 0);

@@ -1,7 +1,7 @@
 CC = clang++
 CXX = clang++
 CXXFLAGS = -std=c++11 -MMD -g
-LDFLAGS = -lwayland-client -lwayland-egl -lEGL -lGLESv2
+LDFLAGS = -lwayland-client -lwayland-egl -lEGL -lGLESv2 -lrt
 
 SOURCES = \
 	buffer.cc \

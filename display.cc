@@ -143,7 +143,7 @@ void Display::OnGlobal(uint32_t id, const char* interface, uint32_t version) {
   } else if (strcmp(interface, "wl_seat") == 0) {
     seat_version_ = version;
     auto seat = registry_->Bind<struct wl_seat>(
-        id, &wl_seat_interface, std::max(seat_version_, 3u));
+        id, &wl_seat_interface, std::min(seat_version_, 3u));
     std::unique_ptr<Seat> input(new Seat(seat));
     seats_.push_back(std::move(input));
   } else if (strcmp(interface, "wl_shell") == 0) {
