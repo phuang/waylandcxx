@@ -19,6 +19,10 @@
 #include "subsurface.h"
 #include "surface.h"
 
+void init();
+void reshape(int w, int h);
+int draw();
+
 void draw(int r, int g, int b, int a) {
   glClearColor(r, g, b, a);
   glClear(GL_COLOR_BUFFER_BIT);
@@ -83,13 +87,16 @@ main(int argc, char** argv) {
   std::unique_ptr<wl::Display> display(new wl::Display());
 
   Window w;
-#if 0
+#if 1
   wl::EGLWindow egl_window(w.surface(), 200, 200);
   egl_window.MakeCurrent();
-  draw(1, 0, 0, 1);
+  init();
+  reshape(300, 300);
+  draw();
+  //draw(1, 0, 0, 1);
   egl_window.SwapBuffers();
 #endif
-
+#if 0
   SharedMemory shared_memory;
   shared_memory.Create(kBufferSize * 3);
   std::unique_ptr<wl::ShmPool> pool =
@@ -108,6 +115,7 @@ main(int argc, char** argv) {
     }
   }
   w.surface()->Attach(buffer_0.get(), 0, 0);
+#endif
 #if 0
   auto surface2 = display->compositor()->CreateSurface();
 

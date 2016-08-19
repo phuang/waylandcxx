@@ -21,6 +21,7 @@ SOURCES = \
 	subsurface.cc \
 	surface.cc \
 	touch.cc \
+	es2tri.cc \
 	$(NULL)
 
 HEADERS = \

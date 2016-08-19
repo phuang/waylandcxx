@@ -73,10 +73,14 @@ void Display::InitEGL() {
     EGL_BLUE_SIZE, 1,
     EGL_ALPHA_SIZE, 1,
     EGL_DEPTH_SIZE, 1,
+    EGL_RENDERABLE_TYPE, EGL_OPENGL_ES2_BIT,
     EGL_NONE
   };
 
-  EGLint *context_attribs = NULL;
+  EGLint context_attribs[] = {
+    EGL_CONTEXT_CLIENT_VERSION, 2,
+    EGL_NONE
+  };
   EGLint api = EGL_OPENGL_ES_API;
 
   egl_display_ = eglGetDisplay(id());
