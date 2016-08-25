@@ -95,8 +95,7 @@ main(int argc, char** argv) {
   draw();
   //draw(1, 0, 0, 1);
   egl_window.SwapBuffers();
-#endif
-#if 0
+#else
   SharedMemory shared_memory;
   shared_memory.Create(kBufferSize * 3);
   std::unique_ptr<wl::ShmPool> pool =

@@ -44,7 +44,7 @@ void Pointer::OnMotion(struct wl_pointer* pointer,
                        uint32_t time,
                        wl_fixed_t surface_x,
                        wl_fixed_t surface_y) {
-  fprintf(stderr, "%s this=%p\n", __PRETTY_FUNCTION__, this);
+  fprintf(stderr, "%s this=%p time=%u\n", __PRETTY_FUNCTION__, this, time);
 }
 
 void Pointer::OnButton(struct wl_pointer* pointer,
