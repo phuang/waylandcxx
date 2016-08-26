@@ -87,7 +87,7 @@ main(int argc, char** argv) {
   std::unique_ptr<wl::Display> display(new wl::Display());
 
   Window w;
-#if 1
+#if 0
   wl::EGLWindow egl_window(w.surface(), 200, 200);
   egl_window.MakeCurrent();
   init();
