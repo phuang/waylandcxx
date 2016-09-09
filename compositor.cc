@@ -4,12 +4,9 @@
 
 namespace wl {
 
-Compositor::Compositor(struct wl_compositor* compositor)
-  : Proxy(compositor) {
-}
+Compositor::Compositor(struct wl_compositor* compositor) : Proxy(compositor) {}
 
-Compositor::~Compositor() {
-}
+Compositor::~Compositor() {}
 
 std::unique_ptr<Surface> Compositor::CreateSurface() {
   return std::unique_ptr<Surface>(

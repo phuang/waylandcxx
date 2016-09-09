@@ -1,8 +1,8 @@
 #ifndef __SUBCOMPOSITOR_H_
 #define __SUBCOMPOSITOR_H_
 
-#include <memory>
 #include <wayland-client.h>
+#include <memory>
 
 #include "proxy.h"
 

@@ -5,7 +5,7 @@
 
 namespace wl {
 
-template<typename T, typename C>
+template <typename T, typename C>
 class Proxy {
  public:
   explicit Proxy(T* id) : id_(id) {

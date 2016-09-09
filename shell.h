@@ -20,7 +20,6 @@ class Shell : public Proxy<struct wl_shell, Shell> {
   std::unique_ptr<ShellSurface> GetShellSurface(
       Surface* surface, ShellSurface::Delegate* delegate);
 };
-
 }
 
 #endif

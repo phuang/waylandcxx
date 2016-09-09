@@ -1,8 +1,8 @@
 #ifndef __COMPOSITOR_H_
 #define __COMPOSITOR_H_
 
-#include <memory>
 #include <wayland-client.h>
+#include <memory>
 
 #include "proxy.h"
 

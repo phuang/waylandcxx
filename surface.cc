@@ -5,17 +5,14 @@
 namespace wl {
 
 const struct wl_surface_listener Surface::surface_listener_ = {
-  Surface::OnEntryThunk,
-  Surface::OnLeaveThunk,
+    Surface::OnEntryThunk, Surface::OnLeaveThunk,
 };
 
-Surface::Surface(struct wl_surface* surface)
-  : Proxy(surface) {
+Surface::Surface(struct wl_surface* surface) : Proxy(surface) {
   wl_surface_add_listener(id(), &surface_listener_, this);
 }
 
-Surface::~Surface() {
-}
+Surface::~Surface() {}
 
 void Surface::Attach(Buffer* buffer, int32_t x, int32_t y) {
   wl_surface_attach(id(), buffer->id(), x, y);
@@ -37,9 +34,7 @@ void Surface::SetInputRegion(struct wl_region* region) {
   wl_surface_set_input_region(id(), region);
 }
 
-void Surface::Commit() {
-  wl_surface_commit(id());
-}
+void Surface::Commit() { wl_surface_commit(id()); }
 
 void Surface::SetBufferTransform(int32_t transform) {
   wl_surface_set_buffer_transform(id(), transform);
@@ -50,34 +45,28 @@ void Surface::SetBufferScale(int32_t scale) {
 }
 
 #if defined(WL_SURFACE_DAMAGE_BUFFER)
-void Surface::DamageBuffer(int32_t x,
-                           int32_t y,
-                           int32_t width,
+void Surface::DamageBuffer(int32_t x, int32_t y, int32_t width,
                            int32_t height) {
   wl_surface_damage_buffer(id(), x, y, width, height);
 }
 #endif
 
-void Surface::OnEntry(struct wl_surface* surface,
-                      struct wl_output* output) {
+void Surface::OnEntry(struct wl_surface* surface, struct wl_output* output) {
   fprintf(stderr, "%s this=%p\n", __PRETTY_FUNCTION__, this);
 }
 
-void Surface::OnLeave(struct wl_surface* surface,
-                      struct wl_output* output) {
+void Surface::OnLeave(struct wl_surface* surface, struct wl_output* output) {
   fprintf(stderr, "%s this=%p\n", __PRETTY_FUNCTION__, this);
 }
 
 // static
-void Surface::OnEntryThunk(void* data,
-                           struct wl_surface* surface,
+void Surface::OnEntryThunk(void* data, struct wl_surface* surface,
                            struct wl_output* output) {
   static_cast<Surface*>(data)->OnEntry(surface, output);
 }
 
 // static
-void Surface::OnLeaveThunk(void* data,
-                           struct wl_surface* surface,
+void Surface::OnLeaveThunk(void* data, struct wl_surface* surface,
                            struct wl_output* output) {
   static_cast<Surface*>(data)->OnLeave(surface, output);
 }

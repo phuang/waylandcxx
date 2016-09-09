@@ -23,14 +23,11 @@ class Seat : public Proxy<struct wl_seat, Seat> {
   // Event handlers:
   void OnCapabilities(struct wl_seat* seat, uint32_t caps);
   void OnName(struct wl_seat* seat, const char* name);
- 
+
   // Event handler thhunks:
-  static void OnCapabilitiesThunk(void* data,
-                                  struct wl_seat* seat,
+  static void OnCapabilitiesThunk(void* data, struct wl_seat* seat,
                                   uint32_t caps);
-  static void OnNameThunk(void* data,
-                          struct wl_seat* seat,
-                          const char* name);
+  static void OnNameThunk(void* data, struct wl_seat* seat, const char* name);
 
   // unique identifiers for this seat.
   std::string name_;

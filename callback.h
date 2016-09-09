@@ -13,13 +13,11 @@ class Callback : public Proxy<struct wl_callback, Callback> {
   ~Callback();
 
   // Event handlers:
-  virtual void OnDone(struct wl_callback* callback,
-                      uint32_t callback_data);
+  virtual void OnDone(struct wl_callback* callback, uint32_t callback_data);
 
  private:
   // Event handler thunks:
-  static void OnDoneThunk(void* data,
-                          struct wl_callback* callback,
+  static void OnDoneThunk(void* data, struct wl_callback* callback,
                           uint32_t callback_data);
 
   static const struct wl_callback_listener listener_;

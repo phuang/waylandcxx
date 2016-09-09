@@ -1,6 +1,6 @@
+#include <GLES2/gl2.h>
 #include <assert.h>
 #include <fcntl.h>
-#include <GLES2/gl2.h>
 #include <sys/mman.h>
 #include <sys/stat.h>
 #include <sys/syscall.h>
@@ -49,10 +49,8 @@ class SharedMemory {
  public:
   SharedMemory() {}
   ~SharedMemory() {
-    if (!memory_)
-      munmap(memory_, size_);
-    if (fd_ >= 0)
-      close(fd_);
+    if (!memory_) munmap(memory_, size_);
+    if (fd_ >= 0) close(fd_);
   }
 
   int fd() { return fd_; }
@@ -68,8 +66,7 @@ class SharedMemory {
       return false;
     }
     shm_unlink(kShmName);
-    if (ftruncate(fd_, size_ = size) < 0)
-      return false;
+    if (ftruncate(fd_, size_ = size) < 0) return false;
     memory_ = mmap(nullptr, size_, PROT_READ | PROT_WRITE, MAP_SHARED, fd_, 0);
     return !memory_;
   }
@@ -82,8 +79,7 @@ class SharedMemory {
 
 const int32_t kBufferSize = 200 * 200 * 4;
 
-int
-main(int argc, char** argv) {
+int main(int argc, char** argv) {
   std::unique_ptr<wl::Display> display(new wl::Display());
 
   Window w;
@@ -109,7 +105,7 @@ main(int argc, char** argv) {
       r = x;
       g = y;
       b = (x + (255 - y)) / 2;
-      *pixels = 0xff000000 | r | (g << 8)| (b << 16);
+      *pixels = 0xff000000 | r | (g << 8) | (b << 16);
       pixels++;
     }
   }

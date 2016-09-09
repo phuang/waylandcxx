@@ -14,16 +14,15 @@ class Registry : public Proxy<struct wl_registry, Registry> {
  public:
   class Delegate {
    public:
-    virtual void OnGlobal(
-        uint32_t id, const char* interface, uint32_t version) {}
+    virtual void OnGlobal(uint32_t id, const char* interface,
+                          uint32_t version) {}
     virtual void OnGlobalRemove(uint32_t id) {}
   };
 
-  explicit Registry(struct wl_registry* registry,
-                    Delegate* delegate);
+  explicit Registry(struct wl_registry* registry, Delegate* delegate);
   ~Registry();
 
-  template<typename T>
+  template <typename T>
   T* Bind(uint32_t name, const struct wl_interface* interface,
           uint32_t version) {
     void* ret = wl_registry_bind(id(), name, interface, version);
@@ -37,13 +36,10 @@ class Registry : public Proxy<struct wl_registry, Registry> {
   void OnGlobalRemove(struct wl_registry* registry, uint32_t id);
 
   // Event handler thunks:
-  static void OnGlobalThunk(void* data,
-                            struct wl_registry* registry,
-                            uint32_t id,
-                            const char* interface,
+  static void OnGlobalThunk(void* data, struct wl_registry* registry,
+                            uint32_t id, const char* interface,
                             uint32_t version);
-  static void OnGlobalRemoveThunk(void* data,
-                                  struct wl_registry* registry,
+  static void OnGlobalRemoveThunk(void* data, struct wl_registry* registry,
                                   uint32_t id);
 
   Delegate* delegate_;
@@ -52,6 +48,5 @@ class Registry : public Proxy<struct wl_registry, Registry> {
 };
 
 }  // namespace wl
-
 
 #endif

@@ -19,9 +19,7 @@ class EGLWindow {
                                           Display::current()->egl_config(),
                                           egl_window_, nullptr);
   }
-  ~EGLWindow() {
-    wl_egl_window_destroy(egl_window_);
-  }
+  ~EGLWindow() { wl_egl_window_destroy(egl_window_); }
   void Resize(int width, int height, int dx, int dy) {
     wl_egl_window_resize(egl_window_, width, height, dx, dy);
   }

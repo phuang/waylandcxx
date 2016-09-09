@@ -24,5 +24,4 @@ class Subsurface : public Proxy<struct wl_subsurface, Subsurface> {
 
 }  // namespace wl
 
-
 #endif

@@ -30,9 +30,7 @@ class Shm : public Proxy<struct wl_shm, Shm> {
   std::set<enum wl_shm_format> formats_;
 
   static const struct wl_shm_listener listener_;
-
 };
-
 }
 
 #endif

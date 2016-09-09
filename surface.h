@@ -26,27 +26,22 @@ class Surface : public Proxy<struct wl_surface, Surface> {
 #if defined(WL_SURFACE_DAMAGE_BUFFER)
   void DamageBuffer(int32_t x, int32_t y, int32_t width, int32_t height);
 #endif
-  
+
  private:
   // Event handlers:
-  void OnEntry(struct wl_surface* surface,
-               struct wl_output* output);
-  void OnLeave(struct wl_surface* surface,
-               struct wl_output* output);
+  void OnEntry(struct wl_surface* surface, struct wl_output* output);
+  void OnLeave(struct wl_surface* surface, struct wl_output* output);
 
   // Event handler thunks:
-  static void OnEntryThunk(void* data,
-                           struct wl_surface* surface,
+  static void OnEntryThunk(void* data, struct wl_surface* surface,
                            struct wl_output* output);
-  static void OnLeaveThunk(void* data,
-                           struct wl_surface* surface,
+  static void OnLeaveThunk(void* data, struct wl_surface* surface,
                            struct wl_output* output);
 
   struct wl_egl_window* egl_window_;
 
   const static wl_surface_listener surface_listener_;
 };
-
 }
 
 #endif

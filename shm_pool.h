@@ -18,16 +18,13 @@ class ShmPool : public Proxy<struct wl_shm_pool, ShmPool> {
   ~ShmPool();
 
   std::unique_ptr<Buffer> CreateBuffer(Buffer::Delegate* delegate,
-                                       int32_t offset,
-                                       int32_t width,
-                                       int32_t height,
-                                       int32_t stride,
+                                       int32_t offset, int32_t width,
+                                       int32_t height, int32_t stride,
                                        uint32_t format);
   void Resize(int32_t size);
 
  private:
 };
-
 }
 
 #endif

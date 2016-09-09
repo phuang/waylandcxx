@@ -48,20 +48,14 @@ class Display : public Proxy<struct wl_display, Display>,
   void OnGlobalRemove(uint32_t id) override;
 
   // Event handlers:
-  void OnError(struct wl_display* display,
-               void* object_id,
-               uint32_t code,
+  void OnError(struct wl_display* display, void* object_id, uint32_t code,
                const char* message);
   void OnDeleteId(struct wl_display* display, uint32_t id);
 
   // Event handler thunks:
-  static void OnErrorThunk(void* data,
-                           struct wl_display* display,
-                           void* object_id,
-                           uint32_t code,
-                           const char* message);
-  static void OnDeleteIdThunk(void* data,
-                              struct wl_display* display,
+  static void OnErrorThunk(void* data, struct wl_display* display,
+                           void* object_id, uint32_t code, const char* message);
+  static void OnDeleteIdThunk(void* data, struct wl_display* display,
                               uint32_t id);
 
   uint32_t seat_version_ = 0;
@@ -79,7 +73,6 @@ class Display : public Proxy<struct wl_display, Display>,
   EGLContext egl_context_;
 
   static const struct wl_display_listener listener_;
-
 };
 
 }  // namespace wl
